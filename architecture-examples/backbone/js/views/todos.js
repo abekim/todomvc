@@ -53,8 +53,13 @@ $(function () {
 		//add a single user
 		addUser: function (user) {
 			var view = new app.UserView({ model: user });
-			console.log(view.render().el.innerHTML);
-			this.$('.user').append(view.render().el.innerHTML);
+			var str = view.render().el.innerHTML;
+			if (this.model.get('user') == user.get('name')) {
+				var index = str.indexOf('option ');
+				var len = 'option '.length; 
+				str = str.substring(0, index + len) + 'selected="selected" ' + str.substring(index + len);
+			}
+			this.$('.user').append(str);
 		},
 
 		toggleVisible: function () {

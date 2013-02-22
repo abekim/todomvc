@@ -34,11 +34,7 @@
 	<script type="text/template" id="item-template">
 		<div class="view">
 			<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
-			<select class="user">
-				<!--<% app.Users.each(function (user) { %>
-					<option value="<%= user.get('name') %>"><%= user.get('name') %></option>
-				<% }); %>-->
-			</select>
+			<select class="user"></select>
 			<label><%- title %></label>
 			<button class="destroy"></button>
 		</div>
