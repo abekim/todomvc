@@ -30,6 +30,11 @@
 	<script type="text/template" id="item-template">
 		<div class="view">
 			<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+			<select class="user">
+				<% app.Users.each(function (user) { %>
+					<option value="<%= user.get('name') %>"><%= user.get('name') %></option>
+				<% }); %>
+			</select>
 			<label><%- title %></label>
 			<button class="destroy"></button>
 		</div>
@@ -57,6 +62,8 @@
 	<script src="../../assets/lodash.min.js"></script>
 	<script src="js/lib/backbone.js"></script>
 	<script src="js/lib/backbone.localStorage.js"></script>
+	<script src="js/models/user.js"></script>
+	<script src="js/collections/users.js"></script>
 	<script src="js/models/todo.js"></script>
 	<script src="js/collections/todos.js"></script>
 	<script src="js/views/todos.js"></script>
