@@ -53,7 +53,8 @@ $(function () {
 		//add a single user
 		addUser: function (user) {
 			var view = new app.UserView({ model: user });
-			this.$('.user').append(view.render().el);
+			console.log(view.render().el.innerHTML);
+			this.$('.user').append(view.render().el.innerHTML);
 		},
 
 		toggleVisible: function () {

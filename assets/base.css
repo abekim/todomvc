@@ -136,7 +136,8 @@ body {
 }
 
 #new-todo {
-	padding: 16px 16px 16px 155px;
+	padding: 16px;
+	margin-left: 139px;
 	border: none;
 	background: rgba(0, 0, 0, 0.02);
 	z-index: 2;

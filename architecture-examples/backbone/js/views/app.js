@@ -74,7 +74,7 @@ $(function ($) {
 		//add a single user
 		addUser: function (user) {
 			var view = new app.UserView({ model: user });
-			$('#assignNewUser').append(view.render().el);
+			$('#assignNewUser').append(view.render().el.innerHTML);
 		},
 
 		// Add a single todo item to the list by creating a view for it, and
@@ -103,9 +103,8 @@ $(function ($) {
 			return {
 				title: this.$input.val().trim(),
 				order: app.Todos.nextOrder(),
-				completed: false
-				// apparently, it's not legal for me to do this yet.
-				// user: this.$('.user').val().trim()
+				completed: false,
+				user: this.$('#assignNewUser').val().trim()
 			};
 		},
 
