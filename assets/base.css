@@ -240,7 +240,7 @@ label[for='toggle-all'] {
 #todo-list li label {
 	word-break: break-word;
 	padding: 15px;
-	margin-left: 45px;
+	margin-left: 140px;
 	display: block;
 	line-height: 1.2;
 	-webkit-transition: color 0.4s;
@@ -297,6 +297,28 @@ label[for='toggle-all'] {
 
 #todo-list li.editing:last-child {
 	margin-bottom: -1px;
+}
+
+/*css style for user drop-downs
+
+	I am officially sad that all the margins in this css are hardcoded
+	instead of using a grid format
+	*/
+.user {
+	position: absolute;
+	margin: 20px;
+	margin-left: 60px;
+}
+
+.user:after {
+	content: '';
+	border-left: 1px solid #f5d6d6;
+	border-right: 1px solid #f5d6d6;
+	width: 2px;
+	position: absolute;
+	top: 0;
+	margin-left: 10px;
+	height: 100%;
 }
 
 #footer {
