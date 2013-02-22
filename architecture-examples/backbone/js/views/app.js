@@ -39,8 +39,6 @@ $(function ($) {
 			this.listenTo(app.Todos, 'filter', this.filterAll);
 			this.listenTo(app.Todos, 'all', this.render);
 
-			app.Users.each(this.addUser, this);
-
 			app.Todos.fetch();
 		},
 
@@ -69,12 +67,17 @@ $(function ($) {
 			}
 
 			this.allCheckbox.checked = !remaining;
+
+			app.Users.each(this.addUser, this);
 		},
 
 		//add a single user
 		addUser: function (user) {
 			var view = new app.UserView({ model: user });
-			$('#assignNewUser').append(view.render().el.innerHTML);
+			var str = view.render().el.innerHTML;
+
+			$('#assignNewUser').append(str);
+			$('#userFilter').append(str);
 		},
 
 		// Add a single todo item to the list by creating a view for it, and
@@ -117,6 +120,9 @@ $(function ($) {
 
 			app.Todos.create(this.newAttributes());
 			this.$input.val('');
+
+			//render the initial dropdown again after adding a todo
+			app.Users.each(this.addUser, this);
 		},
 
 		// Clear all completed todo items, destroying their models.

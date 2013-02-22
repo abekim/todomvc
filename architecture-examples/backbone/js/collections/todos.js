@@ -24,6 +24,13 @@ var app = app || {};
 			});
 		},
 
+		// filter the list by the assigned user.
+		assigned: function(username) {
+			return this.filter(function (todo) {
+				return todo.get('user');
+			});
+		},
+
 		// Filter down the list to only todo items that are still not finished.
 		remaining: function () {
 			return this.without.apply(this, this.completed());

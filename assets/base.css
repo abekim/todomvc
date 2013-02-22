@@ -136,6 +136,7 @@ body {
 }
 
 #new-todo {
+	max-width: 410px;
 	padding: 16px;
 	margin-left: 139px;
 	border: none;
