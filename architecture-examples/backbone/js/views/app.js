@@ -95,8 +95,9 @@ $(function ($) {
 			return {
 				title: this.$input.val().trim(),
 				order: app.Todos.nextOrder(),
-				completed: false,
-				user: this.$('.user').val().trim()
+				completed: false
+				// apparently, it's not legal for me to do this yet.
+				// user: this.$('.user').val().trim()
 			};
 		},
 
