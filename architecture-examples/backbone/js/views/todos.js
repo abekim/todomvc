@@ -43,9 +43,17 @@ $(function () {
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$el.toggleClass('completed', this.model.get('completed'));
 
+			app.Users.each(this.addUser, this);
+
 			this.toggleVisible();
 			this.$input = this.$('.edit');
 			return this;
+		},
+
+		//add a single user
+		addUser: function (user) {
+			var view = new app.UserView({ model: user });
+			this.$('.user').append(view.render().el);
 		},
 
 		toggleVisible: function () {

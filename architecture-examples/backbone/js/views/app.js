@@ -39,6 +39,8 @@ $(function ($) {
 			this.listenTo(app.Todos, 'filter', this.filterAll);
 			this.listenTo(app.Todos, 'all', this.render);
 
+			app.Users.each(this.addUser, this);
+
 			app.Todos.fetch();
 		},
 
@@ -69,10 +71,11 @@ $(function ($) {
 			this.allCheckbox.checked = !remaining;
 		},
 
-		addUsers: function (user) {
+		//add a single user
+		addUser: function (user) {
 			var view = new app.UserView({ model: user });
-			$('#assignNewUser').html()
-		}
+			$('#assignNewUser').append(view.render().el);
+		},
 
 		// Add a single todo item to the list by creating a view for it, and
 		// appending its element to the `<ul>`.
