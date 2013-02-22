@@ -69,6 +69,11 @@ $(function ($) {
 			this.allCheckbox.checked = !remaining;
 		},
 
+		addUsers: function (user) {
+			var view = new app.UserView({ model: user });
+			$('#assignNewUser').html()
+		}
+
 		// Add a single todo item to the list by creating a view for it, and
 		// appending its element to the `<ul>`.
 		addOne: function (todo) {

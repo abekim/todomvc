@@ -136,7 +136,7 @@ body {
 }
 
 #new-todo {
-	padding: 16px 16px 16px 60px;
+	padding: 16px 16px 16px 155px;
 	border: none;
 	background: rgba(0, 0, 0, 0.02);
 	z-index: 2;
@@ -194,6 +194,10 @@ label[for='toggle-all'] {
 	padding: 0;
 }
 
+/*i don't get why the edit needs to have a set width. Hmm..
+	oh goodness. I just figured out that it hides the view mode
+	This also means users won't be able to change the assigned
+	user while editing the title.*/
 #todo-list li.editing .edit {
 	display: block;
 	width: 506px;
@@ -304,12 +308,14 @@ label[for='toggle-all'] {
 	I am officially sad that all the margins in this css are hardcoded
 	instead of using a grid format
 	*/
-.user {
+.user, #assignNewUser {
 	position: absolute;
 	margin: 20px;
 	margin-left: 60px;
 }
 
+/*the following styles are for the slick double divider
+	but it doesn't seem to be working..*/
 .user:after {
 	content: '';
 	border-left: 1px solid #f5d6d6;
