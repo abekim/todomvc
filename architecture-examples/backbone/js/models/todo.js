@@ -23,7 +23,7 @@ var app = app || {};
 			this.save({
 				completed: !this.get('completed')
 			});
-		}
+		},
 
 		//assign a user to the task
 		assign: function (username) {

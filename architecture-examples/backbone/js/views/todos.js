@@ -22,7 +22,8 @@ $(function () {
 			'dblclick label':	'edit',
 			'click .destroy':	'clear',
 			'keypress .edit':	'updateOnEnter',
-			'blur .edit':		'close'
+			'blur .edit':		'close',
+			'change .user': 'assign'
 		},
 
 		// The TodoView listens for changes to its model, re-rendering. Since there's
@@ -54,6 +55,10 @@ $(function () {
 				(!isCompleted && app.TodoFilter === 'completed') ||
 				(isCompleted && app.TodoFilter === 'active')
 			);
+		},
+
+		assign: function () {
+			this.model.assign(this.$('.user').val());
 		},
 
 		// Toggle the `"completed"` state of the model.
