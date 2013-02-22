@@ -95,7 +95,8 @@ $(function ($) {
 			return {
 				title: this.$input.val().trim(),
 				order: app.Todos.nextOrder(),
-				completed: false
+				completed: false,
+				user: this.$('.user').val().trim()
 			};
 		},
 
