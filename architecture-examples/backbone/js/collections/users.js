@@ -31,10 +31,10 @@ var app = app || {};
 
   app.Users = new UserList();
 
-  app.Users.create({name: "Nathan"});
-  app.Users.create({name: "Abe"});
-  app.Users.create({name: "Alex"});
-  app.Users.create({name: "David"});
-  app.Users.create({name: "Murphy"});
+  // app.Users.create({name: "Nathan"});
+  // app.Users.create({name: "Abe"});
+  // app.Users.create({name: "Alex"});
+  // app.Users.create({name: "David"});
+  // app.Users.create({name: "Murphy"});
 
 }());

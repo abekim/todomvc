@@ -310,7 +310,8 @@ label[for='toggle-all'] {
 	I am officially sad that all the margins in this css are hardcoded
 	instead of using a grid format
 	*/
-.user, #assignNewUser {
+.user, #assignNewUser, #new-user {
+	width: 70px;
 	position: absolute;
 	margin: 20px;
 	margin-left: 60px;

@@ -22,7 +22,10 @@ $(function ($) {
 			'keypress #new-todo': 'createOnEnter',
 			'click #clear-completed': 'clearCompleted',
 			'click #toggle-all': 'toggleAllComplete',
-			'change #userFilter': 'filterUser'
+			'change #userFilter': 'filterUser',
+			'change #assignNewUser': 'toggleUserInput',
+			'keyup #new-user': 'createNewUser',
+			'focusout #new-user': 'listUsers'
 		},
 
 		// At initialization we bind to the relevant events on the `Todos`
@@ -32,7 +35,8 @@ $(function ($) {
 			this.allCheckbox = this.$('#toggle-all')[0];
 			this.$filtered = false;
 			this.$count = 0;
-			this.$input = this.$('#new-todo');
+			this.$new_todo = this.$('#new-todo');
+			this.$new_user = this.$('#new-user');
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
 
@@ -41,6 +45,7 @@ $(function ($) {
 			this.listenTo(app.Todos, 'change:completed', this.filterOne);
 			this.listenTo(app.Todos, 'filter', this.filterAll);
 			this.listenTo(app.Todos, 'all', this.render);
+			this.listenTo(app.Users, 'all', this.render);
 
 			app.Todos.fetch();
 		},
@@ -71,11 +76,15 @@ $(function ($) {
 
 			this.allCheckbox.checked = !remaining;
 
+			//populate assignNewUser and userFilter fields
 			this.$('#assignNewUser').html('');
 			this.$('#userFilter').html('<option value="" label="Filter by user..." />');
 			app.Users.each(this.addUser, this);
+			this.$('#assignNewUser').append('<option value="new-user" label="Create a new user..." />');
 
+			//if filtered by user
 			if (this.$filtered) {
+				//apparently it runs this.render() for each todo. 
 				if (this.$count <= app.Todos.length) {
 					this.$count = this.$count + 1;
 				} else {
@@ -84,6 +93,8 @@ $(function ($) {
 					this.$count = 0;
 				}
 			}
+
+			this.toggleUserInput(); //if no user is found, prompt to create one right away.
 		},
 
 		//add a single user
@@ -138,7 +149,7 @@ $(function ($) {
 		// Generate the attributes for a new Todo item.
 		newAttributes: function () {
 			return {
-				title: this.$input.val().trim(),
+				title: this.$new_todo.val().trim(),
 				order: app.Todos.nextOrder(),
 				completed: false,
 				user: this.$('#assignNewUser').val().trim()
@@ -148,12 +159,50 @@ $(function ($) {
 		// If you hit return in the main input field, create new **Todo** model,
 		// persisting it to *localStorage*.
 		createOnEnter: function (e) {
-			if (e.which !== ENTER_KEY || !this.$input.val().trim()) {
+			if (e.which !== ENTER_KEY || !this.$new_todo.val().trim()) {
 				return;
 			}
 
 			app.Todos.create(this.newAttributes());
-			this.$input.val('');
+			this.$new_todo.val('');
+		},
+
+		//toggle new-user input
+		toggleUserInput: function () {
+			if ($('#assignNewUser').val() !== "new-user") {
+				$('#assignNewUser').toggleClass('hidden', false);
+				$('#new-user').toggleClass('hidden', true);
+			} else {
+				$('#assignNewUser').toggleClass('hidden', true);
+				$('#new-user').toggleClass('hidden', false);
+			}
+		},
+
+		//set user to already existing user. Then, trigger 'change'
+		listUsers: function () {
+			this.$new_user.val('');
+			$('#assignNewUser').val(app.Users.at(0).get('name'));
+			$('#assignNewUser').trigger('change');
+		},
+
+		//schema for new users
+		newUserSchema: function () {
+			return {
+				name: this.$new_user.val().trim()
+			}
+		},
+
+		//on key up
+		createNewUser: function(e) {
+			if (e.which === 27) { //if escape is pressed
+				this.listUsers();
+			} else if (e.which !== ENTER_KEY || !this.$new_user.val().trim()) {
+				return;
+			} else {
+				app.Users.create(this.newUserSchema());
+				this.$new_user.val('');
+				this.listUsers();
+			} 
 		},
 
 		// Clear all completed todo items, destroying their models.

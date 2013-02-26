@@ -6,3 +6,14 @@ As for the filtering, I'm going to try to route the app based on the value of th
 This doesn't work because everything's clientside js. That means the views will refresh everytime any change is made: rendering "routing based on a DOM obj" useless.
 
 As using models seems to be the only way to retain data persistently, my next idea is to integrate the userFilter value in the users model. So, get the user based on the filtered attribute and toggle the class "hidden" for todos based on the results. This also means I need to link the changes in the dropdown into the users view.
+
+filtering is completed.
+
+Now on to adding a new user.
+Slightly tough because we have to think about how a user would interact with the dropdown (which should trigger the prompt for new user). After some time, I decided to escape from new user prompt if:
+  1. user presses escape while in focus
+  2. user goes out of focus
+
+Great. I've got everything working. However, I just realized that the users that I'm saving are not necessarily saving to local-storage. They're all being reset...
+
+I'm going to need to figure that out soon.

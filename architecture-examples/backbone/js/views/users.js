@@ -17,19 +17,11 @@ $(function () {
 
     events: {},
 
-    initialize: function () {
-      this.listenTo(this.model, 'filtered', this.filterUser);
-    },
-
     // Re-render the titles of the user item.
     render: function () {
       this.$el.html(this.template(this.model.toJSON()));
 
       return this;
-    },
-
-    filterUser: function () {
-      this.model.toggle();
     }
   });
 });
