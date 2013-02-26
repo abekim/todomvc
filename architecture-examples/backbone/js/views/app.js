@@ -21,7 +21,8 @@ $(function ($) {
 		events: {
 			'keypress #new-todo': 'createOnEnter',
 			'click #clear-completed': 'clearCompleted',
-			'click #toggle-all': 'toggleAllComplete'
+			'click #toggle-all': 'toggleAllComplete',
+			'change #userFilter': 'filterUser'
 		},
 
 		// At initialization we bind to the relevant events on the `Todos`
@@ -68,6 +69,8 @@ $(function ($) {
 
 			this.allCheckbox.checked = !remaining;
 
+			this.$('#assignNewUser').html('');
+			this.$('#userFilter').html('<option value="" label="Filter by user..." />');
 			app.Users.each(this.addUser, this);
 		},
 
@@ -101,6 +104,10 @@ $(function ($) {
 			app.Todos.each(this.filterOne, this);
 		},
 
+		filterUser: function () {
+			$('#filteredBy').html($('#userFilter').val());
+		},
+
 		// Generate the attributes for a new Todo item.
 		newAttributes: function () {
 			return {
@@ -120,9 +127,6 @@ $(function ($) {
 
 			app.Todos.create(this.newAttributes());
 			this.$input.val('');
-
-			//render the initial dropdown again after adding a todo
-			app.Users.each(this.addUser, this);
 		},
 
 		// Clear all completed todo items, destroying their models.

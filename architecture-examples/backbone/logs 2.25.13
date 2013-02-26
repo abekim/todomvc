@@ -1,0 +1,4 @@
+Spent a lot of time debugging because of missed commas (in m, v, and c)
+They're also very tough to spot.
+
+As for the filtering, I'm going to try to route the app based on the value of the dropdown: a lot of jquery/dom manipulation.

@@ -68,7 +68,10 @@ $(function () {
 
 		isHidden: function () {
 			var isCompleted = this.model.get('completed');
+			var user = $('#filteredBy').text().trim();
+
 			return (// hidden cases only
+				(this.model.get('user') !== user && app.TodoFilter === '/user') ||
 				(!isCompleted && app.TodoFilter === 'completed') ||
 				(isCompleted && app.TodoFilter === 'active')
 			);
