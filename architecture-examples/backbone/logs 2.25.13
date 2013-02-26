@@ -17,3 +17,5 @@ Slightly tough because we have to think about how a user would interact with the
 Great. I've got everything working. However, I just realized that the users that I'm saving are not necessarily saving to local-storage. They're all being reset...
 
 I'm going to need to figure that out soon.
+
+I realized that I never fetched the existing users from the local storage. Once I fetched, I saw a lot more users than had intended. I couldn't figure out how to clear the local storage (model.destroy() didn't seem to work), so I just assigned a new local-storage.

@@ -195,7 +195,7 @@ $(function ($) {
 			}
 		},
 
-		//on key up
+		//create a new user.
 		createNewUser: function(e) {
 			if (e.which === 27) { //if escape is pressed
 				this.listUsers();
@@ -203,7 +203,6 @@ $(function ($) {
 				return;
 			} else {
 				app.Users.create(this.newUserSchema());
-				this.$new_user.val('');
 				this.listUsers();
 			} 
 		},
