@@ -30,7 +30,8 @@ $(function ($) {
 		// loading any preexisting todos that might be saved in *localStorage*.
 		initialize: function () {
 			this.allCheckbox = this.$('#toggle-all')[0];
-			app.$filtered = false;
+			this.$filtered = false;
+			this.$count = 0;
 			this.$input = this.$('#new-todo');
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
@@ -74,9 +75,14 @@ $(function ($) {
 			this.$('#userFilter').html('<option value="" label="Filter by user..." />');
 			app.Users.each(this.addUser, this);
 
-			if (app.$filtered) {
-				app.Users.filtered()[0].toggle();
-				app.$filtered = false;
+			if (this.$filtered) {
+				if (this.$count <= app.Todos.length) {
+					this.$count = this.$count + 1;
+				} else {
+					app.Users.filtered()[0].toggle();
+					this.$filtered = false;
+					this.$count = 0;
+				}
 			}
 		},
 
@@ -119,16 +125,14 @@ $(function ($) {
 		//filter by user
 		filterUser: function () {
 			var filteredBy = $('#userFilter').val();
-			
+
 			//if username = selected filter value
 			var filteredUser = app.Users.filter(function (user) {
-				return user.get('name') === filteredBy;
+				return user.get('name') == filteredBy;
 			});
-			
 			//trigger the filtered state:
-			filteredUser[0].trigger('filtered');
-
-			app.$filtered = true;
+			filteredUser[0].toggle();
+			this.$filtered = true;
 		},
 
 		// Generate the attributes for a new Todo item.

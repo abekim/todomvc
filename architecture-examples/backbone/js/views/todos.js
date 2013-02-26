@@ -71,8 +71,6 @@ $(function () {
 			// var assignedUser = this.model.get('user');
 			var filteredUser = app.Users.filtered();
 
-			console.log(filteredUser);
-
 			return (// hidden cases only
 				(filteredUser.length != 0 && this.model.get('user') !== filteredUser[0].get('name') && app.TodoFilter === 'user') ||
 				(!isCompleted && app.TodoFilter === 'completed') ||
