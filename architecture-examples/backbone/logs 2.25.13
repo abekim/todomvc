@@ -2,3 +2,7 @@ Spent a lot of time debugging because of missed commas (in m, v, and c)
 They're also very tough to spot.
 
 As for the filtering, I'm going to try to route the app based on the value of the dropdown: a lot of jquery/dom manipulation.
+
+This doesn't work because everything's clientside js. That means the views will refresh everytime any change is made: rendering "routing based on a DOM obj" useless.
+
+As using models seems to be the only way to retain data persistently, my next idea is to integrate the userFilter value in the users model. So, get the user based on the filtered attribute and toggle the class "hidden" for todos based on the results. This also means I need to link the changes in the dropdown into the users view.

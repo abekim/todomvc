@@ -9,9 +9,15 @@ var app = app || {};
   app.User = Backbone.Model.extend({
 
     defaults: {
-      name: ''
-    }
+      name: '',
+      filtered: false
+    },
 
+    toggle: function () {
+      this.save({
+        filtered: !this.get('filtered')
+      });
+    }
   });
 
 }());
