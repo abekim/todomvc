@@ -45,9 +45,11 @@ $(function ($) {
 			this.listenTo(app.Todos, 'change:completed', this.filterOne);
 			this.listenTo(app.Todos, 'filter', this.filterAll);
 			this.listenTo(app.Todos, 'all', this.render);
-			this.listenTo(app.Users, 'all', this.render);
+			this.listenTo(app.Users, 'reset', this.render);
+			this.listenTo(app.Users, 'add', this.render);
 
 			app.Todos.fetch();
+			app.Users.fetch();
 		},
 
 		// Re-rendering the App just means refreshing the statistics -- the rest
@@ -84,13 +86,13 @@ $(function ($) {
 
 			//if filtered by user
 			if (this.$filtered) {
-				//apparently it runs this.render() for each todo. 
-				if (this.$count <= app.Todos.length) {
-					this.$count = this.$count + 1;
+				//apparently it runs this.render() for each todo.
+				if (this.$count < app.Todos.length) {
+					this.$count++;
 				} else {
-					app.Users.filtered()[0].toggle();
 					this.$filtered = false;
 					this.$count = 0;
+					app.Users.filtered()[0].toggle();
 				}
 			}
 
@@ -143,6 +145,7 @@ $(function ($) {
 			});
 			//trigger the filtered state:
 			filteredUser[0].toggle();
+			
 			this.$filtered = true;
 		},
 

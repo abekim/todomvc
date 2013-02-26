@@ -11,7 +11,7 @@ var app = app || {};
     model: app.User,
 
     // Save all of the user objects under the "users" namespace.
-    localStorage: new Store('users-backbone'),
+    localStorage: new Store('users'),
 
     //get the user we want to filter by
     filtered: function () {

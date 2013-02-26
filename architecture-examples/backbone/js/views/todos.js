@@ -36,6 +36,8 @@ $(function () {
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'destroy', this.remove);
 			this.listenTo(this.model, 'visible', this.toggleVisible);
+			this.listenTo(app.Users, 'reset', this.render);
+			this.listenTo(app.Users, 'add', this.render);
 		},
 
 		// Re-render the titles of the todo item.
